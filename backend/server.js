@@ -7,6 +7,7 @@ const tipsRoutes = require("./routes/tipsRoutes");
 const musicRoutes = require("./routes/musicRoutes");
 const exerciseRoutes = require("./routes/exerciseRoutes");
 const gameRoutes = require("./routes/gameRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 require("dotenv").config();
 
@@ -24,6 +25,7 @@ app.use("/api/tips", tipsRoutes);
 app.use("/api/music", musicRoutes);
 app.use("/api/exercises", exerciseRoutes);
 app.use("/api/games", gameRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

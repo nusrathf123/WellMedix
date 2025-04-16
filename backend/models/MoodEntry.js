@@ -2,27 +2,25 @@ const mongoose = require("mongoose");
 
 const MoodEntrySchema = new mongoose.Schema({
   userId: {
-    type: mongoose.Schema.Types.ObjectId, // We'll link this to the User later
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   mood: {
     type: String,
     required: true,
-    enum: ["stressed","very bad","Bad","Boring","Happy","peacefull"],
+  },
+  stressLevel: {
+    type: Number,
+    default: 0,
   },
   note: {
     type: String,
-    default: "",
-  },
-  stressLevel: {
-    type: Number, // Example: 0–100
-    default: 0,
   },
   date: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("MoodEntry", MoodEntrySchema);
