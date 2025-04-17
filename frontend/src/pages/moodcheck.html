@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WELLMEDIX - Mood Tracker</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        height: 100vh;
+        background: linear-gradient(135deg, #a0dedc, #1e8078, #0f403d);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #0a0a0a;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
+        padding: 40px 30px;
+        max-width: 720px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .quote {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+
+      h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .mood-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .mood-btn {
+        padding: 12px 0;
+        background: linear-gradient(to right, #1e8078, #10433f);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+
+      .mood-btn:hover {
+        background: linear-gradient(to right, #176a64, #0a2d2b);
+        transform: scale(1.03);
+      }
+
+      .stress-display {
+        margin-top: 10px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .stress-circle {
+        width: 70px;
+        height: 70px;
+        border: 2px solid #0a0a0a;
+        border-radius: 50%;
+        margin: 12px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        background-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .next-btn {
+        margin-top: 30px;
+        padding: 12px 28px;
+        background: linear-gradient(to right, #10433f, #1e8078);
+        color: white;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        border-radius: 25px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .next-btn:hover {
+        background: linear-gradient(to right, #176a64, #0a2d2b);
+        transform: scale(1.03);
+      }
+
+      .arrow {
+        font-size: 18px;
+      }
+
+      @media (max-width: 500px) {
+        .mood-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stress-circle {
+          width: 60px;
+          height: 60px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Hello.. WELLMEDIX is always there for you!!..</h2>
+      <div class="quote">
+        “A happy life is built on a foundation of good health and peaceful
+        mind.”
+      </div>
+
+      <h3>How is your mood today..??</h3>
+
+      <div class="mood-grid">
+        <button class="mood-btn" onclick="showStress('Stressful')">
+          Stressful
+        </button>
+        <button class="mood-btn" onclick="showStress('Tired')">Tired</button>
+        <button class="mood-btn" onclick="showStress('Tense')">Tense</button>
+        <button class="mood-btn" onclick="showStress('Very Bad')">
+          Very Bad
+        </button>
+        <button class="mood-btn" onclick="showStress('Irritable')">
+          Irritable
+        </button>
+        <button class="mood-btn" onclick="showStress('Exhausted')">
+          Exhausted
+        </button>
+      </div>
+
+      <div class="stress-display">
+        Stress Level
+        <div class="stress-circle" id="stressValue">--</div>
+      </div>
+
+      <button class="next-btn">Next <span class="arrow">→</span></button>
+    </div>
+
+    <script>
+      const stressMap = {
+        Stressful: "90%",
+        Tired: "40%",
+        Tense: "50%",
+        "Very Bad": "70%",
+        Irritable: "75%",
+        Exhausted: "85%",
+      };
+
+      function showStress(mood) {
+        const value = stressMap[mood] || "--";
+        document.getElementById("stressValue").textContent = value;
+      }
+    </script>
+  </body>
+</html>

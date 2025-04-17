@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth | Wellmedix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+      }
+      .diagonal-bg {
+        background: linear-gradient(135deg, #3e7c77 50%, #111111 50%);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 1.5rem;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      }
+      .hidden {
+        display: none;
+      }
+      input:focus {
+        border-color: #60a5fa;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen diagonal-bg flex items-center justify-center px-4 py-10"
+  >
+    <div
+      class="max-w-6xl w-full flex flex-col md:flex-row justify-center items-center glass-card p-8 md:p-12"
+    >
+      <div class="w-full md:w-1/2 md:pr-10 text-white">
+        <div id="login-form">
+          <h2 class="text-4xl font-bold mb-8">Login</h2>
+          <div class="mb-6">
+            <label class="block mb-2 text-lg">Email:</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
+            />
+          </div>
+          <div class="mb-8">
+            <label class="block mb-2 text-lg">Password:</label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
+            />
+          </div>
+          <button
+            class="w-full py-3 bg-gradient-to-r from-[#3e7c77] to-black rounded-full font-semibold hover:scale-[1.02] transition duration-300 mb-4"
+          >
+            Login
+          </button>
+          <p class="text-sm">
+            Don’t have an account?
+            <button
+              onclick="toggleForm()"
+              class="underline hover:text-teal-300"
+            >
+              Sign Up
+            </button>
+          </p>
+        </div>
+
+        <div id="signup-form" class="hidden">
+          <h2 class="text-4xl font-bold mb-8">Sign Up</h2>
+          <div class="mb-6">
+            <label class="block mb-2 text-lg">User Name:</label>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
+            />
+          </div>
+          <div class="mb-6">
+            <label class="block mb-2 text-lg">Email:</label>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
+            />
+          </div>
+          <div class="mb-8">
+            <label class="block mb-2 text-lg">Password:</label>
+            <input
+              type="password"
+              placeholder="Create a password"
+              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
+            />
+          </div>
+          <button
+            class="w-full py-3 bg-gradient-to-r from-[#3e7c77] to-black rounded-full font-semibold hover:scale-[1.02] transition duration-300 mb-4"
+          >
+            Sign Up
+          </button>
+          <p class="text-sm">
+            Already have an account?
+            <button
+              onclick="toggleForm()"
+              class="underline hover:text-teal-300"
+            >
+              Login
+            </button>
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 mt-10 md:mt-0 text-white text-center md:pl-8">
+        <h1 class="text-4xl font-bold mb-4" id="form-heading">WELCOME BACK!</h1>
+        <p
+          class="text-base opacity-90 italic leading-relaxed"
+          id="form-subtext"
+        >
+          Let’s continue monitoring your stress levels and supporting your
+          well-being.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+      const heading = document.getElementById("form-heading");
+      const subtext = document.getElementById("form-subtext");
+
+      function toggleForm() {
+        const isLoginVisible = !loginForm.classList.contains("hidden");
+        loginForm.classList.toggle("hidden");
+        signupForm.classList.toggle("hidden");
+
+        if (isLoginVisible) {
+          heading.innerText = "WELCOME!";
+          subtext.innerText =
+            "WELLMEDIX is built for healthcare professionals. Let’s manage burnout and support your mental health together.";
+        } else {
+          heading.innerText = "WELCOME BACK!";
+          subtext.innerText =
+            "Let’s continue monitoring your stress levels and supporting your well-being.";
+        }
+      }
+    </script>
+  </body>
+</html>

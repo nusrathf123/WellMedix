@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Peace Options</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background-color: #2e7c74;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+        color: white;
+      }
+
+      .container h2 {
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+      }
+
+      .container p {
+        font-size: 1rem;
+        margin-bottom: 40px;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 140px);
+        gap: 30px;
+        justify-content: center;
+      }
+
+      .card {
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        padding: 20px;
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        transition: transform 0.2s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+      }
+
+      .card .emoji {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: 1.4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Take a deep breathe..</h2>
+      <p>
+        Choose what works best for your peace.<br />your well-being starts here.
+      </p>
+      <div class="card-grid">
+        <a href="destress.html" class="card">
+          <div class="emoji">🧘‍♀️</div>
+          <p>De-stress<br />Tips</p>
+        </a>
+        <a href="music.html" class="card">
+          <div class="emoji">🎵</div>
+          <p>Music</p>
+        </a>
+        <a href="games.html" class="card">
+          <div class="emoji">🎮</div>
+          <p>Games</p>
+        </a>
+        <a href="exercise.html" class="card">
+          <div class="emoji">🏋️‍♂️</div>
+          <p>Exercise</p>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

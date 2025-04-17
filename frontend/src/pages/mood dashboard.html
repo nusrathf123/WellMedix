@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calendar & Mood Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: #2f7e76;
+        color: white;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .dashboard {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .calendar,
+      .graph {
+        background: #f5f5f5;
+        color: black;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      .calendar {
+        width: 340px;
+      }
+      .graph {
+        width: 500px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        height: 40px;
+      }
+      .mood-label {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .mood-input {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      input[type="number"] {
+        padding: 6px 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        width: 80px;
+      }
+      button {
+        padding: 8px 16px;
+        background-color: #044b47;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #066b67;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🌤 Mood Dashboard</h1>
+    <div class="dashboard">
+      <div class="calendar">
+        <h2>April 2025</h2>
+        <div class="mood-label">Enter mood % and click a day:</div>
+        <div class="mood-input">
+          <input
+            type="number"
+            id="moodInput"
+            min="0"
+            max="100"
+            placeholder="0 - 100"
+          />
+          <button onclick="setMoodFromInput()">Set Mood</button>
+        </div>
+        <table id="calendarTable"></table>
+      </div>
+      <div class="graph">
+        <h2>Stress Level Chart</h2>
+        <canvas id="stressChart" width="400" height="300"></canvas>
+      </div>
+    </div>
+    <script>
+      const daysInMonth = 30;
+      const startDay = 2;
+      let selectedMood = null;
+      let selectedStress = null;
+      const moods = {};
+      const stressByWeekday = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+      };
+
+      const moodMap = (percent) => {
+        if (percent <= 20) return { emoji: "😄", stress: percent };
+        if (percent <= 50) return { emoji: "😐", stress: percent };
+        if (percent <= 70) return { emoji: "😫", stress: percent };
+        if (percent <= 90) return { emoji: "😠", stress: percent };
+        return { emoji: "😢", stress: percent };
+      };
+
+      function setMoodFromInput() {
+        const value = parseInt(document.getElementById("moodInput").value);
+        if (isNaN(value) || value < 0 || value > 100) {
+          alert("Please enter a mood percentage between 0 and 100.");
+          return;
+        }
+        const moodObj = moodMap(value);
+        selectedMood = moodObj.emoji;
+        selectedStress = moodObj.stress;
+      }
+
+      function generateCalendar() {
+        const table = document.getElementById("calendarTable");
+        table.innerHTML = "";
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const trHead = document.createElement("tr");
+        for (const d of days) {
+          const th = document.createElement("th");
+          th.innerText = d;
+          trHead.appendChild(th);
+        }
+        table.appendChild(trHead);
+        let tr = document.createElement("tr");
+        for (let i = 0; i < startDay; i++)
+          tr.appendChild(document.createElement("td"));
+        for (let d = 1; d <= daysInMonth; d++) {
+          const td = document.createElement("td");
+          td.innerText = d;
+          td.style.cursor = "pointer";
+          td.onclick = () => addMood(d, td);
+          if (moods[d]) td.innerText = d + " " + moods[d].emoji;
+          tr.appendChild(td);
+          if ((startDay + d) % 7 === 0) {
+            table.appendChild(tr);
+            tr = document.createElement("tr");
+          }
+        }
+        table.appendChild(tr);
+      }
+
+      function addMood(day, cell) {
+        if (!selectedMood) {
+          alert("Enter a mood % first!");
+          return;
+        }
+        moods[day] = { emoji: selectedMood, stress: selectedStress };
+        cell.innerText = day + " " + selectedMood;
+        const weekday = (startDay + day - 1) % 7;
+        stressByWeekday[weekday].push(selectedStress);
+        updateGraph();
+      }
+
+      function updateGraph() {
+        const avgStress = [];
+        for (let i = 0; i < 7; i++) {
+          const data = stressByWeekday[i];
+          const avg = data.length
+            ? data.reduce((a, b) => a + b) / data.length
+            : 0;
+          avgStress.push(avg);
+        }
+        stressChart.data.datasets[0].data = avgStress;
+        stressChart.update();
+      }
+
+      generateCalendar();
+
+      const ctx = document.getElementById("stressChart").getContext("2d");
+      const stressChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+          ],
+          datasets: [
+            {
+              label: "Avg Stress Level (%)",
+              data: [0, 0, 0, 0, 0, 0, 0],
+              borderColor: "#0e4b47",
+              backgroundColor: "#0e4b47",
+              fill: false,
+              tension: 0.3,
+              pointBackgroundColor: "white",
+              pointBorderColor: "#0e4b47",
+              pointRadius: 5,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

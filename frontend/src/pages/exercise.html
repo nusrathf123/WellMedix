@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wellmedix - Exercises</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #a0dedc, #1e8078, #0f403d);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 60px 20px;
+      }
+
+      .container {
+        max-width: 1300px;
+        width: 100%;
+      }
+
+      h1 {
+        text-align: center;
+        color: #ffffff;
+        font-size: 42px;
+        font-weight: bold;
+        margin-bottom: 50px;
+        letter-spacing: 2px;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(10px);
+        border: 1.5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 20px 25px;
+        color: #ffffff;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .card h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+        color: #f9ffb6;
+      }
+
+      .card ul {
+        padding-left: 18px;
+      }
+
+      .card li {
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #ffffdd;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 32px;
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>EXERCISES</h1>
+      <div class="grid">
+        <div class="card">
+          <h3>Breathing & Relaxation</h3>
+          <ul>
+            <li>
+              <span class="highlight">Box Breathing:</span> Inhale for 4
+              seconds.
+            </li>
+            <li>Exhale for 4 seconds.</li>
+            <li>Hold for 4 seconds.</li>
+            <li>Repeat for 1–4 minutes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Stretching & Mobility</h3>
+          <ul>
+            <li>
+              <span class="highlight">Neck rolls:</span> slowly roll your neck
+              clockwise and counterclockwise.
+            </li>
+            <li>
+              <span class="highlight">Shoulder shrugs:</span> lift shoulders to
+              ears, hold for 3 seconds, release.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mindfulness & Meditation</h3>
+          <ul>
+            <li>
+              <span class="highlight">5-Minute Meditation:</span> close your
+              eyes, focus on your breath, let thoughts pass.
+            </li>
+            <li>
+              <span class="highlight">Body Scan Relaxation:</span> lie down,
+              mentally scan head to toe, relaxing each muscle.
+            </li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Yoga</h3>
+          <ul>
+            <li><span class="highlight">Child’s pose:</span></li>
+            <li>Sit on your heels, knees apart.</li>
+            <li>Extend arms forward, rest forehead on the floor.</li>
+            <li>Breathe deeply and hold for 30 seconds to 1 minute.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Visualization</h3>
+          <ul>
+            <li>
+              Close your eyes and imagine a peaceful scene (e.g., forest,
+              mountain).
+            </li>
+            <li>Engage senses—sounds, smells, sensations.</li>
+            <li>Breathe deeply and immerse for 5–10 minutes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Laughter Therapy</h3>
+          <ul>
+            <li>Start with a forced smile and fake laughter.</li>
+            <li>Watch a funny video or recall a happy memory.</li>
+            <li>Engage in social moments that spark joy and laughter.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Relaxation Exercise</h3>
+          <ul>
+            <li>Tense muscles for 5 seconds, then release.</li>
+            <li>Move upwards, focusing on each release.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Quick Physical Activity</h3>
+          <ul>
+            <li>
+              <span class="highlight">5-Minute Cardio:</span> jumping jacks,
+              high knees, or a quick jog.
+            </li>
+            <li>
+              <span class="highlight">Chair Squats:</span> stand and sit
+              repeatedly for 1 minute.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
