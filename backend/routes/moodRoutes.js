@@ -2,44 +2,43 @@ const express = require("express");
 const router = express.Router();
 const MoodEntry = require("../models/MoodEntry");
 
-router.post("/add", async (req, res) => {
+// GET mood history for a user
+router.get("/:userId", async (req, res) => {
   try {
-    const { userId, mood, note, stressLevel } = req.body;
+    const userId = req.params.userId;
+    console.log("📥 Fetching moods for userId:", userId);
 
-    if (!userId || !mood) {
-      return res.status(400).json({ message: "userId and mood are required" });
-    }
+    // Fetch moods sorted by creation time
+    const moods = await MoodEntry.find({ userId }).sort({ createdAt: 1 });
+    console.log("✅ Fetched mood entries:", moods);
 
-    const newMood = new MoodEntry({
-      userId,
-      mood,
-      note,
-      stressLevel,
+    // Define emojis for moods
+    const moodToEmoji = {
+      happy: "😄",
+      sad: "😢",
+      stressed: "😣",
+      neutral: "😐",
+      excited: "🤩",
+      angry: "😠",
+      tired: "😴",
+      anxious: "😰",
+      calm: "😌",
+    };
+
+    // Format each entry
+    const formatted = moods.map((entry) => {
+      const moodDate = entry.date || entry.createdAt;
+      return {
+        date: moodDate ? new Date(moodDate).toISOString().split("T")[0] : "N/A",
+        mood: entry.mood,
+        emoji: moodToEmoji[entry.mood.toLowerCase()] || "❓",
+        stressLevel: entry.stressLevel || 0,
+      };
     });
 
-    await newMood.save();
-    res.status(201).json({ message: "Mood entry saved", data: newMood });
-  } catch (err) {
-    console.error("Error saving mood entry:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
-
-router.get("/history/:userId", async (req, res) => {
-  const { userId } = req.params;
-
-  try {
-    const moodHistory = await MoodEntry.find({ userId }).sort({ createdAt: 1 });
-
-    const formatted = moodHistory.map((entry) => ({
-      date: entry.createdAt.toISOString().split("T")[0],
-      mood: entry.mood,
-      stressLevel: entry.stressLevel || 0,
-    }));
-
-    res.status(200).json({ data: formatted });
-  } catch (err) {
-    console.error(" Error fetching mood history:", err);
+    res.json({ data: formatted });
+  } catch (error) {
+    console.error("❌ Error fetching mood history:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
