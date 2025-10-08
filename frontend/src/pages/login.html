@@ -2,147 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auth | Wellmedix</title>
+    <title>Sign Up | StressCare</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body {
         font-family: "Segoe UI", sans-serif;
       }
+
       .diagonal-bg {
         background: linear-gradient(135deg, #07645c 50%, #111111 50%);
       }
+
       .glass-card {
         background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-radius: 1.5rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
       }
-      .hidden {
-        display: none;
-      }
-      input:focus {
-        border-color: #60a5fa;
+
+      .glass-card:hover {
+        transform: scale(1.01);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
       }
     </style>
   </head>
-  <body
-    class="min-h-screen diagonal-bg flex items-center justify-center px-4 py-10"
-  >
-    <div
-      class="max-w-6xl w-full flex flex-col md:flex-row justify-center items-center glass-card p-8 md:p-12"
-    >
-      <div class="w-full md:w-1/2 md:pr-10 text-white">
-        <div id="login-form">
-          <h2 class="text-4xl font-bold mb-8">Login</h2>
-          <div class="mb-6">
-            <label class="block mb-2 text-lg">Email:</label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
-            />
-          </div>
-          <div class="mb-8">
-            <label class="block mb-2 text-lg">Password:</label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
-            />
-          </div>
-          <button
-            class="w-full py-3 bg-gradient-to-r from-[#3e7c77] to-black rounded-full font-semibold hover:scale-[1.02] transition duration-300 mb-4"
-          >
-            Login
-          </button>
-          <p class="text-sm">
-            Don’t have an account?
-            <button
-              onclick="toggleForm()"
-              class="underline hover:text-teal-300"
-            >
-              Sign Up
-            </button>
-          </p>
-        </div>
+  <body class="h-screen w-screen flex items-center justify-center diagonal-bg">
+    <div class="glass-card w-[90%] max-w-4xl p-10 text-white animate-fade-in">
+      <div class="flex flex-col md:flex-row gap-10">
+        <!-- Form Section -->
+        <div class="flex-1 flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-bold mb-8">Sign Up</h2>
 
-        <div id="signup-form" class="hidden">
-          <h2 class="text-4xl font-bold mb-8">Sign Up</h2>
-          <div class="mb-6">
-            <label class="block mb-2 text-lg">User Name:</label>
-            <input
-              type="text"
-              placeholder="Enter your name"
-              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
-            />
-          </div>
-          <div class="mb-6">
-            <label class="block mb-2 text-lg">Email:</label>
-            <input
-              type="email"
-              placeholder="you@example.com"
-              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
-            />
-          </div>
-          <div class="mb-8">
-            <label class="block mb-2 text-lg">Password:</label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              class="w-full bg-transparent border-b border-white outline-none py-2 placeholder-white text-base"
-            />
-          </div>
+          <label class="mb-1 text-base md:text-lg">Username</label>
+          <input
+            id="signup-username"
+            type="text"
+            class="w-full bg-transparent border-b border-white mb-6 outline-none py-2 placeholder-white text-base"
+            placeholder="Your name"
+          />
+
+          <label class="mb-1 text-base md:text-lg">Email</label>
+          <input
+            id="signup-email"
+            type="email"
+            class="w-full bg-transparent border-b border-white mb-6 outline-none py-2 placeholder-white text-base"
+            placeholder="you@example.com"
+          />
+
+          <label class="mb-1 text-base md:text-lg">Password</label>
+          <input
+            id="signup-password"
+            type="password"
+            class="w-full bg-transparent border-b border-white mb-6 outline-none py-2 placeholder-white text-base"
+            placeholder="Create a password"
+          />
+
           <button
-            class="w-full py-3 bg-gradient-to-r from-[#3e7c77] to-black rounded-full font-semibold hover:scale-[1.02] transition duration-300 mb-4"
+            onclick="signupUser()"
+            class="mt-4 bg-gradient-to-r from-[#3e7c77] to-black px-6 py-3 rounded-full text-white font-semibold hover:scale-105 transition duration-300"
           >
             Sign Up
           </button>
-          <p class="text-sm">
+
+          <p class="mt-6 text-sm">
             Already have an account?
-            <button
-              onclick="toggleForm()"
-              class="underline hover:text-teal-300"
-            >
-              Login
-            </button>
+            <a href="login.html" class="underline hover:text-teal-200">Login</a>
+          </p>
+        </div>
+
+        <!-- Welcome Text Section -->
+        <div
+          class="hidden md:flex flex-1 flex-col justify-center items-center text-center px-6"
+        >
+          <h1 class="text-4xl font-bold mb-4">WELCOME!</h1>
+          <p class="text-base opacity-90 italic">
+            StressCare is here to help you manage burnout and mental wellness
+            through music, games, tips, and more.
           </p>
         </div>
       </div>
-
-      <div class="w-full md:w-1/2 mt-10 md:mt-0 text-white text-center md:pl-8">
-        <h1 class="text-4xl font-bold mb-4" id="form-heading">WELCOME BACK!</h1>
-        <p
-          class="text-base opacity-90 italic leading-relaxed"
-          id="form-subtext"
-        >
-          Let’s continue monitoring your stress levels and supporting your
-          well-being.
-        </p>
-      </div>
     </div>
 
+    <!-- Animation config -->
     <script>
-      const loginForm = document.getElementById("login-form");
-      const signupForm = document.getElementById("signup-form");
-      const heading = document.getElementById("form-heading");
-      const subtext = document.getElementById("form-subtext");
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              "fade-in": "fadeIn 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: 0, transform: "translateY(20px)" },
+                "100%": { opacity: 1, transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
 
-      function toggleForm() {
-        const isLoginVisible = !loginForm.classList.contains("hidden");
-        loginForm.classList.toggle("hidden");
-        signupForm.classList.toggle("hidden");
+      function signupUser() {
+        const username = document
+          .getElementById("signup-username")
+          .value.trim();
+        const email = document.getElementById("signup-email").value.trim();
+        const password = document.getElementById("signup-password").value;
 
-        if (isLoginVisible) {
-          heading.innerText = "WELCOME!";
-          subtext.innerText =
-            "WELLMEDIX is built for healthcare professionals. Let’s manage burnout and support your mental health together.";
-        } else {
-          heading.innerText = "WELCOME BACK!";
-          subtext.innerText =
-            "Let’s continue monitoring your stress levels and supporting your well-being.";
+        if (!username || !email || !password) {
+          alert("⚠ Please fill all fields before signing up.");
+          return;
         }
+
+        // Redirect to moodcheck.html
+        window.location.href = "moodcheck.html";
       }
     </script>
   </body>
