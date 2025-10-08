@@ -1,26 +1,20 @@
 import React from "react";
-import QuoteBox from "./components/QuoteBox";
-import "./App.css"; // Optional: For global styling if needed
+import QuoteBox from "./components/QuoteBox"; // 📦 Import the motivational quote box
+import ChatBot from "./components/ChatBot";   // 💬 Import the chatbot
 
 function App() {
   return (
-    <div
-      className="App"
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#f0f4f8",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      }}
-    >
-      <h1 style={{ fontSize: "2rem", color: "#333", marginBottom: "1.5rem" }}>
-        🩺 WellMedix: Beat the Burnout
-      </h1>
+    <div className="App" style={{ padding: "2rem", fontFamily: "Arial, sans-serif" }}>
+      <h1>🩺 WellMedix: Beat the Burnout</h1>
+
+      {/* Quote Section */}
       <QuoteBox />
+
+      <hr className="my-4" style={{ margin: "2rem 0" }} />
+
+      {/* Chatbot Section */}
+      <h2>🧠 Ask Our AI Anything</h2>
+      <ChatBot />
     </div>
   );
 }
